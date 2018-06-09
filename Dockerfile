@@ -6,9 +6,11 @@ WORKDIR /app
 
 ADD requirements.txt /app
 
-ADD scrapyd.conf ~/.scrapyd.conf
-
 ADD redis.conf /app/redis.conf
+
+RUN mkdir /etc/scrapyd
+
+ADD scrapyd.conf /etc/scrapyd/scrapyd.conf
 
 RUN wget http://download.redis.io/releases/redis-stable.tar.gz && tar xf redis-stable.tar.gz && cd redis-stable && make && make install
 
