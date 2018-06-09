@@ -21,4 +21,4 @@ RUN mkdir /scrapyd && mkdir /app/redis-cluster && pip install -r requirements.tx
 EXPOSE 6379 6800 80
 
 ENTRYPOINT ["scrapyd"]
-ENTRYPOINT ["redis-server", "/app/redis.conf']
+ENTRYPOINT ["redis-server", "/app/redis.conf"]
