@@ -21,5 +21,3 @@ RUN wget https://rubygems.org/rubygems/rubygems-2.7.7.tgz && tar xf rubygems-2.7
 RUN mkdir /scrapyd && mkdir /app/redis-cluster && pip install -r requirements.txt
 
 EXPOSE 6379 6800 80
-
-ENTRYPOINT ["scrapyd"]
