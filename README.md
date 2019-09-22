@@ -17,7 +17,7 @@ docker network create --subnet=172.18.0.0/16 mynetwork
 3) docker run -itd --name redis-16381 --net mynetwork --ip 172.18.0.4 -p 16380:6379 -p 16800:6800 scrapy_redis:latest /bin/bash
 4) docker run -itd --name redis-16382 --net mynetwork --ip 172.18.0.5 -p 16381:6379 -p 16800:6800 scrapy_redis:latest /bin/bash
 5) docker run -itd --name redis-16383 --net mynetwork --ip 172.18.0.6 -p 16382:6379 -p 16800:6800 scrapy_redis:latest /bin/bash
-6 )docker run -itd --name redis-16384 --net mynetwork --ip 172.18.0.7 -p 16383:6379 -p 16800:6800 scrapy_redis:latest /bin/bash
+6) docker run -itd --name redis-16384 --net mynetwork --ip 172.18.0.7 -p 16383:6379 -p 16800:6800 scrapy_redis:latest /bin/bash
 
 4. 修改redis启动配置
 1) docker exec -d redis-16379 sed -i "s/localhost/172.18.0.2/g" /app/redis.conf
