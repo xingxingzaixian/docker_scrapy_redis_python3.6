@@ -2,5 +2,5 @@ scrapy==1.5.0
 scrapyd==1.2.0
 redis==2.10.6
 scrapy-redis==0.6.8
-lxml==4.2.1
+lxml==4.9.1
 requests==2.18.4   
