@@ -1,4 +1,5 @@
-FROM python:3.6
+# 使用受支持的 Python 3.11（Python 3.6 已于 2021 年停止维护）
+FROM python:3.11
 
 MAINTAINER xingxingzaixian "942274053@qq.com"
 

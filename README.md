@@ -1,7 +1,16 @@
 # docker_scrapy_redis_python3.6
 
 ## 简介
-基于docker基础镜像python:3.6，安装scrapy/scrapyd，安装并配置redis集群，针对不同机器的集群配置
+基于docker基础镜像python:3.11，安装scrapy/scrapyd，安装并配置redis集群，针对不同机器的集群配置
+
+## 版本说明（2026 安全升级）
+
+- 基础镜像由 `python:3.6` 升级为 `python:3.11`（Python 3.6 已于 2021 年停止官方维护）。
+- 依赖同步升级到修复已知 CVE 的安全版本，并保证 `scrapy-redis` 分布式功能兼容：
+  - `scrapy==2.9.0`：支持 Python 3.11，且是 `scrapy-redis 0.6.8` 兼容的最高版本（scrapy 2.6+ 与 scrapy-redis 0.6.8 存在不兼容，故不宜继续升高）。
+  - `scrapyd==1.2.1`、`redis==5.0.8`、`lxml==5.3.0`、`requests==2.32.4`（修复 CVE-2026-25645 等）。
+  - `scrapy-redis==0.6.8` 保持不变。
+- 若本地爬虫代码依赖旧版 API，升级后请重新构建镜像并对现有爬虫做回归测试。
 
 ## 运行命令
 

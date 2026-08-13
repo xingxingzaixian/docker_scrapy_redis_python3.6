@@ -1,6 +1,9 @@
-scrapy==1.5.0
-scrapyd==1.2.0
-redis==2.10.6
+# 本项目运行在 Python 3.11 环境（见 Dockerfile）
+# 注意：scrapy-redis 0.6.8 仅与 scrapy <= 2.9 兼容，
+# 因此 scrapy 固定为 2.9.0，其余依赖升级到修复已知 CVE 的最新稳定版本。
+scrapy==2.9.0
+scrapyd==1.2.1
+redis==5.0.8
 scrapy-redis==0.6.8
-lxml==4.2.1
-requests==2.18.4   
+lxml==5.3.0
+requests==2.32.4
