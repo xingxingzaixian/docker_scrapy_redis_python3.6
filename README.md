@@ -6,10 +6,22 @@
 ## 版本说明（2026 安全升级）
 
 - 基础镜像由 `python:3.6` 升级为 `python:3.11`（Python 3.6 已于 2021 年停止官方维护）。
-- 依赖同步升级到修复已知 CVE 的安全版本，并保证 `scrapy-redis` 分布式功能兼容：
-  - `scrapy==2.9.0`：支持 Python 3.11，且是 `scrapy-redis 0.6.8` 兼容的最高版本（scrapy 2.6+ 与 scrapy-redis 0.6.8 存在不兼容，故不宜继续升高）。
-  - `scrapyd==1.2.1`、`redis==5.0.8`、`lxml==5.3.0`、`requests==2.32.4`（修复 CVE-2026-25645 等）。
-  - `scrapy-redis==0.6.8` 保持不变。
+- 依赖已升级到修复已知 CVE 的最新版本：
+
+| 依赖 | 版本 | 说明 |
+|------|------|------|
+| scrapy | 2.19.0 | 修复 CVE-2025-6176、CVE-2026-105782、CVE-2024-1892、CVE-2024-3572、CVE-2024-3574、CVE-2026-84366 等（需 >= 2.16） |
+| requests | 2.34.2 | 修复 CVE-2026-25645（需 >= 2.33） |
+| lxml | 6.1.3 | 修复 CVE-2026-41066（需 >= 6.1.0） |
+| scrapy-redis | 0.9.1 | 已支持 `scrapy>=2.6.0`，取代废弃的 0.6.8 |
+| scrapyd | 1.6.0 | 最新版，要求 `scrapy>=2.0.0` |
+| redis | 5.0.8 | 满足 `scrapy-redis` 对 `redis>=4.2` 的要求 |
+
+- 兼容性说明：`scrapy-redis 0.9.1` 的调度器按接口（鸭子类型）满足 Scrapy 2.16+ 的 `BaseScheduler` 校验，且引擎调用的
+  `open(spider)` / `close(reason)` / `enqueue_request(request)` / `next_request()` / `has_pending_requests()` 签名与之一致。
+- 配置兼容性：`SCHEDULER` / `SCHEDULER_*`、`DUPEFILTER_CLASS`、`REDIS_HOST` / `REDIS_PORT` / `REDIS_URL` / `REDIS_PARAMS`、
+  `REDIS_ITEMS_KEY` / `REDIS_ITEMS_SERIALIZER`、`START_URLS_KEY` 等设置项与 0.6.8 保持一致；仅移除了
+  `REDIS_START_URLS_BATCH_SIZE`，并新增 `MAX_IDLE_TIME`、`REDIS_START_URLS_AS_ZSET` 等可选设置。
 - 若本地爬虫代码依赖旧版 API，升级后请重新构建镜像并对现有爬虫做回归测试。
 
 ## 运行命令
